@@ -32,7 +32,7 @@ SELECT c.LastName || ", " || FirstName AS FullName,
 
   i.InvoiceDate,
 
-BillingCountry
+  c.Country
 
 FROM Customer c
 
@@ -49,9 +49,33 @@ FROM  Employee
 
 WHERE Title = 'Sales Support Agent';
 ```
+##### 5) Provide a query showing a unique list of billing countries from the Invoice table.
+```
+<!-- DISTINCT eliminates duplicate records -->
+SELECT DISTINCT BillingCountry
 
+FROM  Invoice
 
+ORDER BY BillingCountry ASC;
+```
+##### 6) Provide a query that shows the invoices associated with each sales agent. The resultant table should include the Sales Agent's full name.
+```
+SELECT 
 
+  e.LastName || ", " || e.FirstName AS FullName,
+
+  i.InvoiceId AS InvoiceID
+
+FROM Employee e
+
+INNER JOIN Customer c ON e.EmployeeId = c.SupportRepId
+
+INNER JOIN Invoice i ON c.CustomerId = i.CustomerId
+
+WHERE e.Title = 'Sales Support Agent'
+
+ORDER BY EmployeeId || InvoiceId;
+```
 
 
 
