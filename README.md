@@ -192,8 +192,25 @@ GROUP BY
 
   InvoiceId;
 ```
+##### 11) Provide a query that includes the track name with each invoice line item.
+```
+SELECT
 
+  il.InvoiceId AS 'Invoice ID',
 
+  il.InvoiceLineId AS 'Invoice Line ID',
+
+  t.Name AS 'Track Title'
+
+FROM
+
+  InvoiceLine il
+
+INNER JOIN
+
+  Track t ON t.TrackId = il.TrackId;
+```
+##### 12) 
 
 
 
