@@ -108,8 +108,8 @@ WHERE
 
   e.Title = 'Sales Support Agent';
 ```
-##### 8) 
-Invoices in 2009: 83
+##### 8) How many Invoices were there in 2009 and 2011? What are the respective total sales for each of those years?(include both the answers and the queries used to find the answers)
+###### Invoices in 2009: 83
 ```
 SELECT 
 
@@ -127,7 +127,7 @@ AND
 
   InvoiceDate <= '2009-12-31';
 ```
-Invoices in 2011: 83
+###### Invoices in 2011: 83
 ```
 SELECT 
 
@@ -145,7 +145,7 @@ AND
 
   InvoiceDate <= '2011-12-31';
 ```
-Code to create report of all sales in 2009:
+###### Code to create report of all sales in 2009:
 ```
 SELECT 
 
@@ -163,8 +163,20 @@ AND
 
   InvoiceDate <= '2009-12-31';
 ```
+##### 9) Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for Invoice ID 37.
+```
+SELECT
 
+  COUNT(InvoiceId)
 
+FROM 
+
+  InvoiceLine
+
+WHERE
+
+  InvoiceId = 37;
+```
 
 
 
