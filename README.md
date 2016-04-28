@@ -108,7 +108,61 @@ WHERE
 
   e.Title = 'Sales Support Agent';
 ```
+##### 8) 
+Invoices in 2009: 83
+```
+SELECT 
 
+  COUNT(*)
+
+FROM
+
+  Invoice
+
+WHERE
+
+  InvoiceDate >= '2009-01-01'
+
+AND
+
+  InvoiceDate <= '2009-12-31';
+```
+Invoices in 2011: 83
+```
+SELECT 
+
+  COUNT(*)
+
+FROM
+
+  Invoice
+
+WHERE
+
+  InvoiceDate >= '2011-01-01'
+
+AND
+
+  InvoiceDate <= '2011-12-31';
+```
+Code to create report of all sales in 2009:
+```
+SELECT 
+
+  *
+
+FROM
+
+  Invoice
+
+WHERE
+
+  InvoiceDate >= '2009-01-01'
+
+AND
+
+  InvoiceDate <= '2009-12-31';
+```
 
 
 
