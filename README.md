@@ -210,12 +210,75 @@ INNER JOIN
 
   Track t ON t.TrackId = il.TrackId;
 ```
-##### 12) 
+##### 12) Provide a query that includes the purchased track name AND artist name with each invoice line item.
+```
+SELECT
 
+  il.InvoiceId AS 'Invoice ID',
 
+  il.InvoiceLineId AS 'Invoice Line ID',
 
+  t.Name AS 'Track Title',
 
+  ar.Name AS 'Artist'
 
+FROM
+
+  InvoiceLine il
+
+INNER JOIN
+
+  Track t ON t.TrackId = il.TrackId
+
+INNER JOIN
+
+  Album al ON al.AlbumId = t.AlbumId
+
+INNER JOIN
+
+  Artist ar ON ar.ArtistId = al.ArtistId;
+```
+##### 13) Provide a query that shows the # of invoices per country. HINT: GROUP BY
+```
+SELECT
+
+  c.Country,
+
+  COUNT(InvoiceId)
+
+FROM
+
+  Customer c
+
+INNER JOIN
+
+  Invoice i ON i.CustomerId = c.CustomerId
+
+GROUP BY Country;
+```
+##### 14) Provide a query that shows the total number of tracks in each playlist. The Playlist name should be include on the resulant table.
+```
+SELECT
+
+  pl.PlaylistId,
+
+  pl.Name,
+
+  COUNT(t.TrackId) AS 'Songs'
+
+FROM
+
+  Track t
+
+INNER JOIN
+
+  PlaylistTrack plt ON plt.TrackId = t.TrackId
+
+INNER JOIN
+
+  Playlist pl ON pl.PlaylistId = plt.PlaylistId
+
+GROUP BY pl.PlaylistId;
 
 
 
