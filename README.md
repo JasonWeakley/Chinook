@@ -279,11 +279,96 @@ INNER JOIN
   Playlist pl ON pl.PlaylistId = plt.PlaylistId
 
 GROUP BY pl.PlaylistId;
+```
+##### 15) Provide a query that shows all the Tracks, but displays no IDs. The resultant table should include the Album name, Media type and Genre.
+```
+SELECT
 
+  t.Name AS 'Track Name',
 
+  al.Title AS 'Album Name',
 
+  mt.Name AS 'MediaType',
 
+  g.Name AS 'Genre'
 
+FROM
+
+  Track t
+
+INNER JOIN
+
+  Album al ON al.AlbumId = t.AlbumId
+
+INNER JOIN
+
+  MediaType mt ON mt.MediaTypeId = t.MediaTypeId
+
+INNER JOIN
+
+  Genre g ON g.GenreId = t.GenreId;
+```
+##### 16) Provide a query that shows all Invoices but includes the # of invoice line items.
+```
+SELECT
+
+  i.InvoiceId,
+
+  COUNT(il.InvoiceLineId)
+
+FROM
+
+  Invoice i
+
+INNER JOIN
+
+  InvoiceLine il ON il.InvoiceId = i.InvoiceId
+
+GROUP BY i.InvoiceId;
+```
+##### 17) Provide a query that shows total sales made by each sales agent.
+```
+SELECT
+
+  e.FirstName || " " || e.LastName AS 'Full Name',
+
+  SUM(i.Total) AS 'Total Sales'
+
+FROM
+
+  Employee e
+
+INNER JOIN
+
+  Customer c ON c.SupportRepId = e.EmployeeId
+
+INNER JOIN
+
+  Invoice i ON i.CustomerId = c.CustomerId
+
+WHERE e.Title = 'Sales Support Agent'
+
+GROUP BY e.EmployeeId;
+```
+##### 18)
+``` 
+SELECT
+  e.FirstName || " " || e.LastName,
+  MAX(i.Total)
+FROM
+  Employee e
+INNER JOIN
+  Customer c ON c.SupportRepId = e.EmployeeId
+INNER JOIN
+  Invoice i ON i.CustomerId = c.CustomerId
+WHERE 
+  e.Title = 'Sales Support Agent'
+where
+  InvoiceDate >= '2009-01-01'
+AND
+  InvoiceDate <= '2009-12-31'
+GROUP BY e.EmployeeId;
+```
 
 
 
