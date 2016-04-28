@@ -177,6 +177,36 @@ WHERE
 
   InvoiceId = 37;
 ```
+##### 10) Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for each Invoice. HINT: GROUP BY
+```
+SELECT
+
+  il.InvoiceId AS 'Invoice ID',
+  COUNT(InvoiceId) AS 'Total Line Items'
+
+FROM 
+
+  InvoiceLine il
+
+GROUP BY
+
+  InvoiceId;
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
