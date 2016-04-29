@@ -350,25 +350,114 @@ WHERE e.Title = 'Sales Support Agent'
 
 GROUP BY e.EmployeeId;
 ```
-##### 18)
+##### 18) Which sales agent made the most in sales in 2009? HINT: MAX
 ``` 
 SELECT
-  e.FirstName || " " || e.LastName,
-  MAX(i.Total)
+
+  e.FirstName || " " || e.LastName AS 'Sales Agent',
+
+  SUM(i.Total) AS '2009 Total Sales'
+
 FROM
+
   Employee e
+
 INNER JOIN
+
   Customer c ON c.SupportRepId = e.EmployeeId
+
 INNER JOIN
+
   Invoice i ON i.CustomerId = c.CustomerId
+
 WHERE 
+
   e.Title = 'Sales Support Agent'
-where
-  InvoiceDate >= '2009-01-01'
+
 AND
+
+  InvoiceDate >= '2009-01-01'
+
+AND
+
   InvoiceDate <= '2009-12-31'
-GROUP BY e.EmployeeId;
+
+GROUP BY e.EmployeeId
+
+ORDER BY SUM(i.Total)
+
+DESC LIMIT 1;
+
+<!-- Without GROUP BY the sales totals get added together, must use DESC only after an ORDER BY, and LIMIT # limits resultant rows returned -->
 ```
+##### 19) Which sales agent made the most in sales over all?
+```
+SELECT
+
+  e.FirstName || " " || e.LastName AS 'Sales Agent',
+
+  SUM(i.Total) AS '2009 Total Sales'
+
+FROM
+
+  Employee e
+
+INNER JOIN
+
+  Customer c ON c.SupportRepId = e.EmployeeId
+
+INNER JOIN
+
+  Invoice i ON i.CustomerId = c.CustomerId
+
+WHERE 
+
+  e.Title = 'Sales Support Agent'
+
+AND
+
+  InvoiceDate >= '2009-01-01'
+
+GROUP BY e.EmployeeId
+
+ORDER BY SUM(i.Total)
+
+DESC LIMIT 1;
+```
+##### 20) Provide a query that shows the # of customers assigned to each sales agent.
+```
+SELECT
+
+  e.FirstName || " " || e.LastName AS 'Sales Agent',
+
+  COUNT(c.SupportRepId) AS AssignedCustomers
+
+FROM
+
+  Employee e
+
+INNER JOIN
+
+  Customer c ON c.SupportRepId = e.EmployeeId
+
+WHERE 
+
+  e.Title = 'Sales Support Agent'
+
+GROUP BY e.EmployeeId
+
+
+ORDER BY AssignedCustomers
+
+DESC LIMIT 1;
+```
+
+
+
+
+
+
+
 
 
 
