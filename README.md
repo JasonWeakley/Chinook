@@ -451,11 +451,144 @@ ORDER BY AssignedCustomers
 
 DESC LIMIT 1;
 ```
+##### 21) Provide a query that shows the total sales per country. Which country's customers spent the most?
+```
+SELECT
 
+  c.Country,
 
+  SUM(i.Total) AS TotalSales
 
+FROM
 
+  Customer c
 
+INNER JOIN
+
+  Invoice i ON c.CustomerId = i.CustomerId
+
+GROUP BY c.Country
+
+ORDER BY TotalSales
+
+DESC;
+```
+##### 22) Provide a query that shows the most purchased track of 2013.
+```
+SELECT
+
+  t.Name AS TrackName,
+
+  COUNT(il.TrackId) AS 'MostPurchaedof2013'
+
+FROM
+
+  InvoiceLine il
+
+INNER JOIN
+
+  Invoice i ON il.InvoiceId = i.InvoiceId
+
+INNER JOIN
+
+  Track t ON t.TrackId = il.TrackId
+
+WHERE
+
+  i.InvoiceDate >= '2013-01-01'
+
+AND
+
+  i.InvoiceDate <= '2013-12-31'
+
+GROUP BY t.Name
+
+ORDER BY COUNT(il.TrackId) 
+
+DESC LIMIT 9;
+```
+##### 23) Provide a query that shows the top 5 most purchased tracks over all.
+```
+SELECT
+
+  t.Name AS TrackName,
+
+  COUNT(il.TrackId) AS 'TOP 5 TRACKS EVER!!!'
+
+FROM
+
+  InvoiceLine il
+
+INNER JOIN
+
+  Invoice i ON il.InvoiceId = i.InvoiceId
+
+INNER JOIN
+
+  Track t ON t.TrackId = il.TrackId
+
+GROUP BY t.Name
+
+ORDER BY COUNT(il.TrackId) 
+
+DESC LIMIT 5;
+```
+##### 24) Provide a query that shows the top 3 best selling artists.
+```
+SELECT
+
+  a.Name AS Artist,
+
+  COUNT(a.ArtistId) AS 'TOP 3 ARTISTS EVER!!!'
+
+FROM
+
+  InvoiceLine il
+
+INNER JOIN
+
+  Track t ON t.TrackId = il.TrackId
+
+INNER JOIN
+
+  Album al ON al.AlbumId = t.AlbumId
+
+INNER JOIN
+
+  Artist a ON a.ArtistId = al.ArtistId
+
+GROUP BY a.Name
+
+ORDER BY COUNT(a.ArtistId) 
+
+DESC LIMIT 3;
+```
+##### 25) Provide a query that shows the most purchased Media Type.
+```
+SELECT
+
+  m.Name AS MediaType,
+
+  COUNT(t.TrackId) AS 'Most Purchased Media Type'
+
+FROM
+
+  InvoiceLine il
+
+INNER JOIN
+
+  Track t ON t.TrackId = il.TrackId
+
+INNER JOIN
+
+  MediaType m ON m.MediaTypeId = t.MediatypeId
+
+GROUP BY m.Name
+
+ORDER BY COUNT(t.TrackId) 
+
+DESC LIMIT 1;
+```
 
 
 
